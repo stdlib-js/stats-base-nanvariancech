@@ -103,43 +103,37 @@ The use of the term `n-1` is commonly referred to as Bessel's correction. Note, 
 
 <!-- /.intro -->
 
+<section class="installation">
 
+## Installation
+
+```bash
+npm install @stdlib/stats-base-nanvariancech
+```
+
+Alternatively,
+
+-   To load the package in a website via a `script` tag without installation and bundlers, use the [ES Module][es-module] available on the [`esm`][esm-url] branch (see [README][esm-readme]).
+-   If you are using Deno, visit the [`deno`][deno-url] branch (see [README][deno-readme] for usage intructions).
+-   For use in Observable, or in browser/node environments, use the [Universal Module Definition (UMD)][umd] build available on the [`umd`][umd-url] branch (see [README][umd-readme]).
+
+The [branches.md][branches-url] file summarizes the available branches and displays a diagram illustrating their relationships.
+
+To view installation and usage instructions specific to each branch build, be sure to explicitly navigate to the respective README files on each branch, as linked to above.
+
+</section>
 
 <section class="usage">
 
 ## Usage
 
-To use in Observable,
-
 ```javascript
-nanvariancech = require( 'https://cdn.jsdelivr.net/gh/stdlib-js/stats-base-nanvariancech@umd/browser.js' )
+var nanvariancech = require( '@stdlib/stats-base-nanvariancech' );
 ```
 
-To vendor stdlib functionality and avoid installing dependency trees for Node.js, you can use the UMD server build:
+#### nanvariancech( N, correction, x, strideX )
 
-```javascript
-var nanvariancech = require( 'path/to/vendor/umd/stats-base-nanvariancech/index.js' )
-```
-
-To include the bundle in a webpage,
-
-```html
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/stdlib-js/stats-base-nanvariancech@umd/browser.js"></script>
-```
-
-If no recognized module system is present, access bundle contents via the global scope:
-
-```html
-<script type="text/javascript">
-(function () {
-    window.nanvariancech;
-})();
-</script>
-```
-
-#### nanvariancech( N, correction, x, stride )
-
-Computes the [variance][variance] of a strided array `x` ignoring `NaN` values and using a one-pass trial mean algorithm.
+Computes the [variance][variance] of a strided array ignoring `NaN` values and using a one-pass trial mean algorithm.
 
 ```javascript
 var x = [ 1.0, -2.0, NaN, 2.0 ];
@@ -153,38 +147,32 @@ The function has the following parameters:
 -   **N**: number of indexed elements.
 -   **correction**: degrees of freedom adjustment. Setting this parameter to a value other than `0` has the effect of adjusting the divisor during the calculation of the [variance][variance] according to `n-c` where `c` corresponds to the provided degrees of freedom adjustment and `n` corresponds to the number of non-`NaN` indexed elements. When computing the [variance][variance] of a population, setting this parameter to `0` is the standard choice (i.e., the provided array contains data constituting an entire population). When computing the unbiased sample [variance][variance], setting this parameter to `1` is the standard choice (i.e., the provided array contains data sampled from a larger population; this is commonly referred to as Bessel's correction).
 -   **x**: input [`Array`][mdn-array] or [`typed array`][mdn-typed-array].
--   **stride**: index increment for `x`.
+-   **strideX**: stride length for `x`.
 
-The `N` and `stride` parameters determine which elements in `x` are accessed at runtime. For example, to compute the [variance][variance] of every other element in `x`,
+The `N` and stride parameters determine which elements in the stided array are accessed at runtime. For example, to compute the [variance][variance] of every other element in `x`,
 
 ```javascript
-var floor = require( '@stdlib/math-base-special-floor' );
+var x = [ 1.0, 2.0, 2.0, -7.0, -2.0, 3.0, 4.0, 2.0, NaN, NaN ];
 
-var x = [ 1.0, 2.0, 2.0, -7.0, -2.0, 3.0, 4.0, 2.0, NaN ];
-var N = floor( x.length / 2 );
-
-var v = nanvariancech( N, 1, x, 2 );
+var v = nanvariancech( 5, 1, x, 2 );
 // returns 6.25
 ```
 
 Note that indexing is relative to the first index. To introduce an offset, use [`typed array`][mdn-typed-array] views.
 
-<!-- eslint-disable stdlib/capitalized-comments -->
+<!-- eslint-disable stdlib/capitalized-comments, max-len -->
 
 ```javascript
 var Float64Array = require( '@stdlib/array-float64' );
-var floor = require( '@stdlib/math-base-special-floor' );
 
-var x0 = new Float64Array( [ 2.0, 1.0, 2.0, -2.0, -2.0, 2.0, 3.0, 4.0, NaN ] );
+var x0 = new Float64Array( [ 2.0, 1.0, 2.0, -2.0, -2.0, 2.0, 3.0, 4.0, NaN, NaN ] );
 var x1 = new Float64Array( x0.buffer, x0.BYTES_PER_ELEMENT*1 ); // start at 2nd element
 
-var N = floor( x0.length / 2 );
-
-var v = nanvariancech( N, 1, x1, 2 );
+var v = nanvariancech( 5, 1, x1, 2 );
 // returns 6.25
 ```
 
-#### nanvariancech.ndarray( N, correction, x, stride, offset )
+#### nanvariancech.ndarray( N, correction, x, strideX, offsetX )
 
 Computes the [variance][variance] of a strided array ignoring `NaN` values and using a one-pass trial mean algorithm and alternative indexing semantics.
 
@@ -197,17 +185,14 @@ var v = nanvariancech.ndarray( x.length, 1, x, 1, 0 );
 
 The function has the following additional parameters:
 
--   **offset**: starting index for `x`.
+-   **offsetX**: starting index for `x`.
 
-While [`typed array`][mdn-typed-array] views mandate a view offset based on the underlying `buffer`, the `offset` parameter supports indexing semantics based on a starting index. For example, to calculate the [variance][variance] for every other value in `x` starting from the second value
+While [`typed array`][mdn-typed-array] views mandate a view offset based on the underlying buffer, the offset parameter supports indexing semantics based on a starting index. For example, to calculate the [variance][variance] for every other element in the strided array starting from the second element
 
 ```javascript
-var floor = require( '@stdlib/math-base-special-floor' );
+var x = [ 2.0, 1.0, 2.0, -2.0, -2.0, 2.0, 3.0, 4.0, NaN, NaN ];
 
-var x = [ 2.0, 1.0, 2.0, -2.0, -2.0, 2.0, 3.0, 4.0 ];
-var N = floor( x.length / 2 );
-
-var v = nanvariancech.ndarray( N, 1, x, 2, 1 );
+var v = nanvariancech.ndarray( 5, 1, x, 2, 1 );
 // returns 6.25
 ```
 
@@ -220,6 +205,7 @@ var v = nanvariancech.ndarray( N, 1, x, 2, 1 );
 ## Notes
 
 -   If `N <= 0`, both functions return `NaN`.
+-   Both functions support array-like objects having getter and setter accessors for array element access (e.g., [`@stdlib/array-base/accessor`][@stdlib/array/base/accessor]).
 -   If `n - c` is less than or equal to `0` (where `c` corresponds to the provided degrees of freedom adjustment and `n` corresponds to the number of non-`NaN` indexed elements), both functions return `NaN`.
 -   The underlying algorithm is a specialized case of Neely's two-pass algorithm. As the variance is invariant with respect to changes in the location parameter, the underlying algorithm uses the first non-`NaN` strided array element as a trial mean to shift subsequent data values and thus mitigate catastrophic cancellation. Accordingly, the algorithm's accuracy is best when data is **unordered** (i.e., the data is **not** sorted in either ascending or descending order such that the first value is an "extreme" value).
 -   Depending on the environment, the typed versions ([`dnanvariancech`][@stdlib/stats/strided/dnanvariancech], [`snanvariancech`][@stdlib/stats/base/snanvariancech], etc.) are likely to be significantly more performant.
@@ -234,33 +220,24 @@ var v = nanvariancech.ndarray( N, 1, x, 2, 1 );
 
 <!-- eslint no-undef: "error" -->
 
-```html
-<!DOCTYPE html>
-<html lang="en">
-<body>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/stdlib-js/random-base-randu@umd/browser.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/stdlib-js/math-base-special-round@umd/browser.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/stdlib-js/array-float64@umd/browser.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/stdlib-js/stats-base-nanvariancech@umd/browser.js"></script>
-<script type="text/javascript">
-(function () {
+```javascript
+var uniform = require( '@stdlib/random-base-uniform' );
+var filledarrayBy = require( '@stdlib/array-filled-by' );
+var bernoulli = require( '@stdlib/random-base-bernoulli' );
+var nanvariancech = require( '@stdlib/stats-base-nanvariancech' );
 
-var x;
-var i;
-
-x = new Float64Array( 10 );
-for ( i = 0; i < x.length; i++ ) {
-    x[ i ] = round( (randu()*100.0) - 50.0 );
+function rand() {
+    if ( bernoulli( 0.8 ) < 1 ) {
+        return NaN;
+    }
+    return uniform( -50.0, 50.0 );
 }
+
+var x = filledarrayBy( 10, 'generic', rand );
 console.log( x );
 
 var v = nanvariancech( x.length, 1, x, 1 );
 console.log( v );
-
-})();
-</script>
-</body>
-</html>
 ```
 
 </section>
@@ -388,15 +365,17 @@ Copyright &copy; 2016-2025. The Stdlib [Authors][stdlib-authors].
 
 <!-- <related-links> -->
 
-[@stdlib/stats/strided/dnanvariancech]: https://github.com/stdlib-js/stats-strided-dnanvariancech/tree/umd
+[@stdlib/stats/strided/dnanvariancech]: https://github.com/stdlib-js/stats-strided-dnanvariancech
 
-[@stdlib/stats/base/nanstdevch]: https://github.com/stdlib-js/stats-base-nanstdevch/tree/umd
+[@stdlib/stats/base/nanstdevch]: https://github.com/stdlib-js/stats-base-nanstdevch
 
-[@stdlib/stats/base/nanvariance]: https://github.com/stdlib-js/stats-base-nanvariance/tree/umd
+[@stdlib/stats/base/nanvariance]: https://github.com/stdlib-js/stats-base-nanvariance
 
-[@stdlib/stats/base/snanvariancech]: https://github.com/stdlib-js/stats-base-snanvariancech/tree/umd
+[@stdlib/stats/base/snanvariancech]: https://github.com/stdlib-js/stats-base-snanvariancech
 
-[@stdlib/stats/base/variancech]: https://github.com/stdlib-js/stats-base-variancech/tree/umd
+[@stdlib/stats/base/variancech]: https://github.com/stdlib-js/stats-base-variancech
+
+[@stdlib/array/base/accessor]: https://github.com/stdlib-js/array-base-accessor
 
 <!-- </related-links> -->
 
