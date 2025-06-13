@@ -4,7 +4,29 @@
 
 <section class="release" id="unreleased">
 
-## Unreleased (2025-05-26)
+## Unreleased (2025-06-13)
+
+<section class="features">
+
+### Features
+
+-   [`4acf1ca`](https://github.com/stdlib-js/stdlib/commit/4acf1ca51aee9b6b142d5f7218e893d06dca0f96) - add accessor protocol support and refactor `stats/base/nanvariancech` [(#6167)](https://github.com/stdlib-js/stdlib/pull/6167)
+
+</section>
+
+<!-- /.features -->
+
+<section class="issues">
+
+### Closed Issues
+
+This release closes the following issue:
+
+[#6167](https://github.com/stdlib-js/stdlib/pull/6167)
+
+</section>
+
+<!-- /.issues -->
 
 <section class="commits">
 
@@ -12,6 +34,7 @@
 
 <details>
 
+-   [`4acf1ca`](https://github.com/stdlib-js/stdlib/commit/4acf1ca51aee9b6b142d5f7218e893d06dca0f96) - **feat:** add accessor protocol support and refactor `stats/base/nanvariancech` [(#6167)](https://github.com/stdlib-js/stdlib/pull/6167) _(by Rahul Kumar, Athan Reines, stdlib-bot, Gururaj Gurram)_
 -   [`6e7d598`](https://github.com/stdlib-js/stdlib/commit/6e7d598246fa754fdebe1ccbf275972fccde56fe) - **refactor:** update paths _(by Aayush Khanna)_
 
 </details>
@@ -24,9 +47,12 @@
 
 ### Contributors
 
-A total of 1 person contributed to this release. Thank you to this contributor:
+A total of 4 people contributed to this release. Thank you to the following contributors:
 
 -   Aayush Khanna
+-   Athan Reines
+-   Gururaj Gurram
+-   Rahul Kumar
 
 </section>
 
