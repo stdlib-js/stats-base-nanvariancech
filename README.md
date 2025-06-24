@@ -363,6 +363,8 @@ Copyright &copy; 2016-2025. The Stdlib [Authors][stdlib-authors].
 
 [@schubert:2018a]: https://doi.org/10.1145/3221269.3223036
 
+[@stdlib/array/base/accessor]: https://github.com/stdlib-js/array-base-accessor
+
 <!-- <related-links> -->
 
 [@stdlib/stats/strided/dnanvariancech]: https://github.com/stdlib-js/stats-strided-dnanvariancech
@@ -374,8 +376,6 @@ Copyright &copy; 2016-2025. The Stdlib [Authors][stdlib-authors].
 [@stdlib/stats/base/snanvariancech]: https://github.com/stdlib-js/stats-base-snanvariancech
 
 [@stdlib/stats/base/variancech]: https://github.com/stdlib-js/stats-base-variancech
-
-[@stdlib/array/base/accessor]: https://github.com/stdlib-js/array-base-accessor
 
 <!-- </related-links> -->
 
