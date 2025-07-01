@@ -271,7 +271,7 @@ console.log( v );
 -   <span class="package-name">[`@stdlib/stats-base/nanstdevch`][@stdlib/stats/base/nanstdevch]</span><span class="delimiter">: </span><span class="description">calculate the standard deviation of a strided array ignoring NaN values and using a one-pass trial mean algorithm.</span>
 -   <span class="package-name">[`@stdlib/stats-base/nanvariance`][@stdlib/stats/base/nanvariance]</span><span class="delimiter">: </span><span class="description">calculate the variance of a strided array ignoring NaN values.</span>
 -   <span class="package-name">[`@stdlib/stats-base/snanvariancech`][@stdlib/stats/base/snanvariancech]</span><span class="delimiter">: </span><span class="description">calculate the variance of a single-precision floating-point strided array ignoring NaN values and using a one-pass trial mean algorithm.</span>
--   <span class="package-name">[`@stdlib/stats-base/variancech`][@stdlib/stats/base/variancech]</span><span class="delimiter">: </span><span class="description">calculate the variance of a strided array using a one-pass trial mean algorithm.</span>
+-   <span class="package-name">[`@stdlib/stats-strided/variancech`][@stdlib/stats/strided/variancech]</span><span class="delimiter">: </span><span class="description">calculate the variance of a strided array using a one-pass trial mean algorithm.</span>
 
 </section>
 
@@ -375,7 +375,7 @@ Copyright &copy; 2016-2025. The Stdlib [Authors][stdlib-authors].
 
 [@stdlib/stats/base/snanvariancech]: https://github.com/stdlib-js/stats-base-snanvariancech
 
-[@stdlib/stats/base/variancech]: https://github.com/stdlib-js/stats-base-variancech
+[@stdlib/stats/strided/variancech]: https://github.com/stdlib-js/stats-strided-variancech
 
 <!-- </related-links> -->
 
